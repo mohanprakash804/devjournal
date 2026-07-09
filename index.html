@@ -507,20 +507,20 @@
 
   async function loadState(){
     try{
-      const res = await window.storage.get('devjournal-state', false);
-      if(res && res.value){
-        const parsed = JSON.parse(res.value);
+      const raw = localStorage.getItem('devjournal-state');
+      if(raw){
+        const parsed = JSON.parse(raw);
         state = Object.assign(structuredClone(DEFAULT_STATE), parsed);
       }
     }catch(e){
-      // no saved state yet
+      // no saved state yet, or storage unavailable
       state = structuredClone(DEFAULT_STATE);
     }
   }
 
   async function saveState(){
     try{
-      await window.storage.set('devjournal-state', JSON.stringify(state), false);
+      localStorage.setItem('devjournal-state', JSON.stringify(state));
     }catch(e){
       showToast('Could not save — storage error');
       console.error(e);
