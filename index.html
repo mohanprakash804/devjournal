@@ -9,103 +9,70 @@
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
   :root{
-    --bg: #12151a;
-    --surface: #1b1f26;
-    --surface-2: #222833;
-    --border: #2a2f38;
-    --text: #e9e6dd;
-    --text-muted: #8b92a0;
-    --accent: #e8a33d;
-    --accent-soft: rgba(232,163,61,0.14);
-    --green: #6fcf97;
-    --green-soft: rgba(111,207,151,0.14);
-    --red: #eb5757;
-    --red-soft: rgba(235,87,87,0.14);
-    --teal: #4fb3a9;
-    --teal-soft: rgba(79,179,169,0.14);
-    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    --sans: 'Inter', system-ui, -apple-system, sans-serif;
-    --radius: 10px;
+    --bg: #12151a; --surface: #1b1f26; --surface-2: #222833; --border: #2a2f38;
+    --text: #e9e6dd; --text-muted: #8b92a0; --accent: #e8a33d; --accent-soft: rgba(232,163,61,0.14);
+    --green: #6fcf97; --teal: #4fb3a9; --red: #eb5757; --radius: 10px;
+    --mono: 'IBM Plex Mono', monospace; --sans: 'Inter', sans-serif;
   }
 
   *{ box-sizing: border-box; }
-  html,body{ height:100%; }
-  body{
-    margin:0; background: var(--bg); color: var(--text);
-    font-family: var(--sans); display:flex; min-height:100vh;
-  }
-  ::selection{ background: var(--accent-soft); color: var(--accent); }
-  ::-webkit-scrollbar{ width:8px; height:8px; }
-  ::-webkit-scrollbar-thumb{ background: var(--border); border-radius:4px; }
-
-  a, button, input, textarea, select{ font-family: inherit; color: inherit; }
-  button{ cursor:pointer; }
+  html, body{ height: 100%; margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); }
+  body{ display: flex; overflow: hidden; }
 
   /* Sidebar */
-  .sidebar{ width: 240px; flex-shrink:0; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 16px; display:flex; flex-direction:column; gap: 28px; }
-  .brand .logo{ font-family: var(--mono); font-weight:700; font-size: 18px; color: var(--text); }
+  .sidebar{ width: 240px; flex-shrink: 0; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 16px; display: flex; flex-direction: column; gap: 28px; }
+  .brand .logo{ font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--text); }
   .brand .logo span{ color: var(--accent); }
-  .nav{ display:flex; flex-direction:column; gap: 2px; }
-  .nav-item{ display:flex; align-items:center; gap: 10px; padding: 9px 10px; border-radius: 7px; background: transparent; border: none; text-align:left; font-size: 13.5px; color: var(--text-muted); font-family: var(--mono); transition: background .15s; }
+  .nav{ display: flex; flex-direction: column; gap: 4px; }
+  .nav-item{
+    display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 7px;
+    background: transparent; border: none; text-align: left; font-size: 14px;
+    color: var(--text-muted); font-family: var(--mono); cursor: pointer; transition: 0.2s;
+  }
+  .nav-item:hover{ background: var(--surface-2); color: var(--text); }
   .nav-item.active{ background: var(--accent-soft); color: var(--accent); }
-  .nav-item .bullet{ color: var(--border); font-size: 14px; width: 10px; }
-  .nav-item.active .bullet{ color: var(--accent); }
+  .nav-item .bullet{ font-size: 12px; }
 
-  .sidebar-footer{ margin-top:auto; display:flex; flex-direction:column; gap:8px; }
-  .ghost-btn{ background: var(--surface-2); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 8px 10px; border-radius: 7px; font-family: var(--mono); text-align:left; }
+  /* Main Content */
+  .main{ flex: 1; overflow-y: auto; padding: 40px; }
+  .view{ display: none; max-width: 1000px; margin: 0 auto; animation: fadeIn 0.3s ease; }
+  .view.active{ display: block; }
+  @keyframes fadeIn{ from{ opacity: 0; transform: translateY(10px); } to{ opacity: 1; transform: translateY(0); } }
 
-  /* Main */
-  .main{ flex:1; min-width:0; padding: 32px 40px 60px; max-width: 1080px; }
-  .view{ display:none; animation: fadeIn .25s ease; }
-  .view.active{ display:block; }
-  @keyframes fadeIn{ from{ opacity:0; transform: translateY(4px);} to{opacity:1; transform:none;} }
+  h1{ font-family: var(--mono); font-size: 24px; margin-bottom: 8px; }
+  p.subtitle{ color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
+  
+  .card{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+  .section-title{ font-family: var(--mono); font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 1px; }
 
-  .card{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
-  .view-header{ margin-bottom: 28px; }
-  .view-header h1{ font-family: var(--mono); font-size: 22px; margin: 0 0 6px; }
-  .section-title{ font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; color: var(--text-muted); margin: 0 0 14px; }
-
-  /* Dashboard Stats */
-  .stat-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
-  .stat-card{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
-  .stat-card .num{ font-family: var(--mono); font-size: 26px; font-weight:700; color: var(--accent); }
-  .stat-card .label{ font-size: 12px; color: var(--text-muted); margin-top:4px; }
-  .dash-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+  /* Stats Grid */
+  .stat-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+  .stat-card{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+  .stat-card .num{ font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--accent); }
+  .stat-card .label{ font-size: 12px; color: var(--text-muted); margin-top: 5px; }
 
   /* Forms */
-  input[type=text], input[type=date], input[type=number], textarea, select{ width:100%; background: var(--surface-2); border: 1px solid var(--border); border-radius: 7px; padding: 9px 11px; font-size: 13.5px; margin-bottom: 10px; color: white; }
-  .btn{ background: var(--accent); color: #1a1408; border: none; font-weight:600; font-size: 13.5px; padding: 10px 16px; border-radius: 7px; font-family: var(--mono); }
+  input, textarea, select{ width: 100%; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; color: white; margin-bottom: 15px; font-size: 14px; }
+  .btn{ background: var(--accent); color: #1a1408; border: none; font-weight: 700; padding: 12px 20px; border-radius: 8px; font-family: var(--mono); cursor: pointer; }
+  .btn:disabled{ opacity: 0.5; cursor: not-allowed; }
 
   /* Timeline */
-  .timeline{ position:relative; margin-top: 22px; padding-left: 26px; }
-  .timeline::before{ content:''; position:absolute; left: 6px; top:4px; bottom:4px; width: 1px; background: var(--border); }
-  .commit{ position:relative; padding-bottom: 22px; }
-  .commit::before{ content:''; position:absolute; left:-26px; top: 4px; width:11px; height:11px; border-radius:50%; background: var(--bg); border: 2px solid var(--accent); }
-  .commit-hash{ color: var(--teal); font-size: 12.5px; font-family: var(--mono); }
-  .commit-title{ font-weight:600; font-size: 14.5px; margin: 4px 0; }
+  .timeline{ position: relative; padding-left: 30px; border-left: 1px solid var(--border); margin-left: 10px; }
+  .commit{ position: relative; margin-bottom: 30px; }
+  .commit::before{ content: ''; position: absolute; left: -36px; top: 5px; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+  .commit-date{ font-size: 12px; color: var(--teal); font-family: var(--mono); }
+  .commit-title{ font-weight: 600; font-size: 16px; margin: 5px 0; }
 
-  /* Skills */
-  .skill-row{ display:flex; align-items:center; gap:14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
-  .skill-bar-track{ flex:1; height:8px; background: var(--surface-2); border-radius:4px; overflow:hidden; }
-  .skill-bar-fill{ height:100%; background: linear-gradient(90deg, var(--teal), var(--accent)); }
-  .skill-level{ font-family: var(--mono); width:38px; text-align:right; font-size:12.5px; color: var(--text-muted); }
-
-  /* GitHub Profile Styles */
-  .gh-profile{ display:flex; gap:16px; align-items:center; margin-bottom: 20px; }
-  .gh-profile img{ width:64px; height:64px; border-radius:50%; border:2px solid var(--accent); }
-  .event-item{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size: 13px; }
-
-  /* Goals */
-  .goal-card{ border: 1px solid var(--border); border-radius: var(--radius); padding:16px; margin-bottom:12px; }
-  .week-grid{ display:flex; gap:3px; margin-top:10px; }
-  .day-cell{ width:15px; height:15px; border-radius:2px; background: var(--surface-2); }
-  .day-cell.done{ background: var(--green); }
+  /* GitHub Profile */
+  .gh-profile{ display: flex; gap: 20px; align-items: center; margin-bottom: 25px; }
+  .gh-profile img{ width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--accent); }
+  .event-item{ display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
 
   @media (max-width: 800px){
-    body{ flex-direction:column; }
-    .sidebar{ width:100%; flex-direction:row; padding: 10px; overflow-x:auto; }
-    .stat-grid{ grid-template-columns: repeat(2,1fr); }
-    .dash-grid{ grid-template-columns: 1fr; }
+    body{ flex-direction: column; }
+    .sidebar{ width: 100%; height: auto; flex-direction: row; overflow-x: auto; }
+    .nav{ flex-direction: row; }
+    .stat-grid{ grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -114,184 +81,185 @@
   <nav class="sidebar">
     <div class="brand">
       <div class="logo">dev<span>Journal</span></div>
-      <div class="tagline">growth tracker</div>
     </div>
-    <div class="nav" id="nav">
-      <button class="nav-item active" data-view="dashboard"><span class="bullet">●</span>dashboard</button>
-      <button class="nav-item" data-view="journal"><span class="bullet">●</span>journal</button>
-      <button class="nav-item" data-view="skills"><span class="bullet">●</span>skills</button>
-      <button class="nav-item" data-view="github"><span class="bullet">●</span>github</button>
-      <button class="nav-item" data-view="goals"><span class="bullet">●</span>goals</button>
-    </div>
-    <div class="sidebar-footer">
-      <button class="ghost-btn" id="exportBtn">export json</button>
+    <div class="nav">
+      <button class="nav-item active" data-view="dashboard"><span class="bullet">●</span> dashboard</button>
+      <button class="nav-item" data-view="journal"><span class="bullet">●</span> journal</button>
+      <button class="nav-item" data-view="skills"><span class="bullet">●</span> skills</button>
+      <button class="nav-item" data-view="github"><span class="bullet">●</span> github</button>
+      <button class="nav-item" data-view="goals"><span class="bullet">●</span> goals</button>
     </div>
   </nav>
 
   <main class="main">
     <!-- DASHBOARD -->
     <section class="view active" id="view-dashboard">
-      <div class="view-header"><h1>Overview</h1><p>Your progress summary.</p></div>
+      <h1>Dashboard</h1>
+      <p class="subtitle">Overview of your growth log.</p>
       <div class="stat-grid" id="statGrid"></div>
-      <div class="dash-grid">
-        <div class="card"><p class="section-title">Recent logs</p><div id="recentCommits"></div></div>
-        <div class="card"><p class="section-title">Top Skills</p><div id="topSkills"></div></div>
+      <div class="card">
+        <p class="section-title">Recent Activity</p>
+        <div id="dashJournal"></div>
       </div>
     </section>
 
     <!-- JOURNAL -->
     <section class="view" id="view-journal">
-      <div class="view-header"><h1>Journal</h1><p>Log your daily building process.</p></div>
+      <h1>Journal</h1>
+      <p class="subtitle">Log your daily progress.</p>
       <div class="card">
-        <input type="text" id="jTitle" placeholder="What did you build/learn?">
-        <textarea id="jBody" placeholder="Notes..."></textarea>
-        <div style="display:flex; gap:10px;">
-           <input type="date" id="jDate">
-           <button class="btn" id="addEntryBtn">Log Entry</button>
-        </div>
+        <input type="text" id="jTitle" placeholder="What did you build today?">
+        <textarea id="jNotes" placeholder="Additional notes..."></textarea>
+        <button class="btn" id="saveJournal">Commit to Log →</button>
       </div>
       <div id="journalList"></div>
     </section>
 
     <!-- SKILLS -->
     <section class="view" id="view-skills">
-      <div class="view-header"><h1>Skills</h1></div>
-      <div class="card" style="margin-bottom:15px;">
+      <h1>Skills</h1>
+      <p class="subtitle">Track your learning curve.</p>
+      <div class="card">
         <div style="display:flex; gap:10px;">
-          <input type="text" id="sName" placeholder="Skill (e.g. Python)">
-          <input type="number" id="sLevel" placeholder="Level 0-100">
-          <button class="btn" id="addSkillBtn">Add</button>
+          <input type="text" id="sName" placeholder="Skill (e.g. React)">
+          <input type="number" id="sLevel" placeholder="Level (0-100)" style="width:120px;">
+          <button class="btn" id="saveSkill">Add</button>
         </div>
       </div>
       <div id="skillList"></div>
-      <div class="chart-wrap" style="height:250px; margin-top:20px;"><canvas id="skillBarChart"></canvas></div>
     </section>
 
     <!-- GITHUB -->
     <section class="view" id="view-github">
-      <div class="view-header"><h1>GitHub Activity</h1><p>Fetch details for any username.</p></div>
+      <h1>GitHub Activity</h1>
+      <p class="subtitle">Enter any GitHub username to see their stats.</p>
       <div class="card">
         <div style="display:flex; gap:10px;">
-          <input type="text" id="ghUsername" placeholder="Enter GitHub username...">
-          <button class="btn" id="ghConnectBtn">Fetch activity</button>
+          <input type="text" id="ghUsername" placeholder="e.g. mohanprakash804">
+          <button class="btn" id="ghBtn">Fetch Data</button>
         </div>
-        <p id="ghError" style="color:var(--red); display:none; margin-top:10px;"></p>
+        <p id="ghError" style="color:var(--red); display:none; margin-top:10px;">User not found!</p>
       </div>
       <div id="ghContent"></div>
     </section>
 
     <!-- GOALS -->
     <section class="view" id="view-goals">
-      <div class="view-header"><h1>Goals</h1></div>
-      <div class="card" style="margin-bottom:15px;">
+      <h1>Goals</h1>
+      <p class="subtitle">Keep your streak alive.</p>
+      <div class="card">
         <input type="text" id="gTitle" placeholder="Set a new goal...">
-        <button class="btn" id="addGoalBtn">Add Goal</button>
+        <button class="btn" id="saveGoal">Add Goal</button>
       </div>
       <div id="goalList"></div>
     </section>
   </main>
 
 <script>
-(function(){
-  "use strict";
+  // 1. STATE & STORAGE
+  let state = JSON.parse(localStorage.getItem('mohan_dev_data') || '{"journals":[], "skills":[], "goals":[]}');
 
-  // State Management
-  const DEFAULT_STATE = { entries: [], skills: [], goals: [] };
-  let state = Object.assign(DEFAULT_STATE, JSON.parse(localStorage.getItem('devjournal-v2') || '{}'));
+  function saveState() {
+    localStorage.setItem('mohan_dev_data', JSON.stringify(state));
+    renderAll();
+  }
 
-  function save(){ localStorage.setItem('devjournal-v2', JSON.stringify(state)); renderAll(); }
-  function uid(){ return Math.random().toString(36).slice(2,9); }
-
-  // Navigation
+  // 2. NAVIGATION (CLICK FIX)
   document.querySelectorAll('.nav-item').forEach(btn => {
-    btn.onclick = () => {
-      document.querySelectorAll('.nav-item, .view').forEach(el => el.classList.remove('active'));
+    btn.addEventListener('click', () => {
+      // Remove active from all
+      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      
+      // Add active to clicked
       btn.classList.add('active');
-      document.getElementById('view-' + btn.dataset.view).classList.add('active');
-    };
+      const viewId = 'view-' + btn.getAttribute('data-view');
+      document.getElementById(viewId).classList.add('active');
+    });
   });
 
-  // Render All Sections
+  // 3. RENDER LOGIC
   function renderAll() {
-    // Dashboard
+    // Stat cards
     document.getElementById('statGrid').innerHTML = `
-      <div class="stat-card"><div class="num">${state.entries.length}</div><div class="label">logs</div></div>
-      <div class="stat-card"><div class="num">${state.skills.length}</div><div class="label">skills</div></div>
-      <div class="stat-card"><div class="num">${state.goals.length}</div><div class="label">goals</div></div>
-      <div class="stat-card"><div class="num">${new Set(state.entries.map(e=>e.date)).size}</div><div class="label">active days</div></div>
+      <div class="stat-card"><div class="num">${state.journals.length}</div><div class="label">Logs</div></div>
+      <div class="stat-card"><div class="num">${state.skills.length}</div><div class="label">Skills</div></div>
+      <div class="stat-card"><div class="num">${state.goals.length}</div><div class="label">Goals</div></div>
+      <div class="stat-card"><div class="num">${new Date().getDate()}</div><div class="label">Day of Month</div></div>
     `;
 
-    // Journal
-    const jList = document.getElementById('journalList');
-    jList.innerHTML = state.entries.sort((a,b)=>b.ts - a.ts).map(e=>`
+    // Journal List
+    const jHtml = state.journals.map(j => `
       <div class="timeline"><div class="commit">
-        <div class="commit-hash">#${e.id}</div>
-        <div class="commit-title">${e.title}</div>
-        <div style="font-size:12px; color:var(--text-muted)">${e.date}</div>
+        <div class="commit-date">${j.date}</div>
+        <div class="commit-title">${j.title}</div>
       </div></div>
-    `).join('') || '<div class="empty-state">No logs yet.</div>';
+    `).reverse().join('');
+    document.getElementById('journalList').innerHTML = jHtml || '<p style="color:var(--text-muted)">No logs yet.</p>';
+    document.getElementById('dashJournal').innerHTML = jHtml || 'No logs.';
 
-    // Skills
-    const sList = document.getElementById('skillList');
-    sList.innerHTML = state.skills.map(s=>`
-      <div class="skill-row">
-        <div style="width:100px; font-size:13px;">${s.name}</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${s.level}%"></div></div>
-        <div class="skill-level">${s.level}</div>
+    // Skill List
+    document.getElementById('skillList').innerHTML = state.skills.map(s => `
+      <div class="card" style="margin-bottom:10px; padding:15px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span>${s.name}</span><span>${s.level}%</span>
+        </div>
+        <div style="height:6px; background:var(--surface-2); border-radius:3px; overflow:hidden;">
+          <div style="width:${s.level}%; height:100%; background:var(--teal);"></div>
+        </div>
       </div>
     `).join('');
 
-    // Goals
-    const gList = document.getElementById('goalList');
-    gList.innerHTML = state.goals.map(g=>`
-      <div class="goal-card">
-        <div style="font-weight:600">${g.title}</div>
-        <div class="week-grid">${Array(14).fill(0).map(()=>`<div class="day-cell"></div>`).join('')}</div>
-      </div>
-    `).join('') || '<div class="empty-state">No goals set.</div>';
+    // Goal List
+    document.getElementById('goalList').innerHTML = state.goals.map(g => `
+      <div class="card">${g.title}</div>
+    `).join('') || 'No goals.';
   }
 
-  // Add Journal
-  document.getElementById('addEntryBtn').onclick = () => {
+  // 4. BUTTON ACTIONS
+  document.getElementById('saveJournal').onclick = () => {
     const t = document.getElementById('jTitle').value;
     if(!t) return;
-    state.entries.push({ id: uid(), title: t, date: document.getElementById('jDate').value || new Date().toISOString().slice(0,10), ts: Date.now() });
-    document.getElementById('jTitle').value = ''; save();
+    state.journals.push({ title: t, date: new Date().toLocaleDateString() });
+    document.getElementById('jTitle').value = '';
+    saveState();
   };
 
-  // Add Skill
-  document.getElementById('addSkillBtn').onclick = () => {
+  document.getElementById('saveSkill').onclick = () => {
     const n = document.getElementById('sName').value;
     const l = document.getElementById('sLevel').value;
     if(!n) return;
-    state.skills.push({ name: n, level: parseInt(l) || 0 });
-    document.getElementById('sName').value = ''; save();
+    state.skills.push({ name: n, level: l || 0 });
+    document.getElementById('sName').value = ''; document.getElementById('sLevel').value = '';
+    saveState();
   };
 
-  // Add Goal
-  document.getElementById('addGoalBtn').onclick = () => {
+  document.getElementById('saveGoal').onclick = () => {
     const t = document.getElementById('gTitle').value;
     if(!t) return;
     state.goals.push({ title: t });
-    document.getElementById('gTitle').value = ''; save();
+    document.getElementById('gTitle').value = '';
+    saveState();
   };
 
-  // GITHUB LOGIC (THE FIX FOR ANY USER)
-  document.getElementById('ghConnectBtn').onclick = async () => {
+  // 5. GITHUB FETCH (FIX FOR ANY USER)
+  document.getElementById('ghBtn').onclick = async () => {
     const user = document.getElementById('ghUsername').value.trim();
     if(!user) return;
-    const btn = document.getElementById('ghConnectBtn');
-    const err = document.getElementById('ghError');
+    
+    const btn = document.getElementById('ghBtn');
     const wrap = document.getElementById('ghContent');
+    const err = document.getElementById('ghError');
 
     btn.textContent = 'Fetching...'; btn.disabled = true; err.style.display = 'none';
 
     try {
       const [uResp, eResp] = await Promise.all([
         fetch(`https://api.github.com/users/${user}`),
-        fetch(`https://api.github.com/users/${user}/events/public?per_page=10`)
+        fetch(`https://api.github.com/users/${user}/events/public?per_page=5`)
       ]);
-      if(!uResp.ok) throw new Error('User not found');
+
+      if(!uResp.ok) throw new Error();
       const userData = await uResp.json();
       const eventsData = await eResp.json();
 
@@ -300,17 +268,17 @@
           <div class="gh-profile">
             <img src="${userData.avatar_url}">
             <div>
-              <div style="font-weight:700; font-size:16px;">${userData.name || userData.login}</div>
-              <div style="color:var(--teal); font-size:13px;">@${userData.login}</div>
+              <div style="font-weight:700; font-size:18px;">${userData.name || userData.login}</div>
+              <div style="color:var(--teal)">@${userData.login}</div>
             </div>
           </div>
           <div style="text-align:center; margin-bottom:20px;">
             <img src="https://github-readme-stats.vercel.app/api?username=${userData.login}&show_icons=true&theme=dark&hide_border=true" style="max-width:100%; margin-bottom:10px;">
             <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${userData.login}&layout=compact&theme=dark&hide_border=true" style="max-width:100%;">
           </div>
-          <p class="section-title">Public Events</p>
+          <p class="section-title">Recent Public Events</p>
           <div>
-            ${eventsData.slice(0,5).map(ev => `
+            ${eventsData.map(ev => `
               <div class="event-item">
                 <span>${ev.type.replace('Event','')} in ${ev.repo.name}</span>
                 <span style="color:var(--text-muted)">${new Date(ev.created_at).toLocaleDateString()}</span>
@@ -319,12 +287,16 @@
           </div>
         </div>
       `;
-    } catch(e) { err.textContent = e.message; err.style.display = 'block'; wrap.innerHTML = ''; }
-    finally { btn.textContent = 'Fetch activity'; btn.disabled = false; }
+    } catch(e) {
+      err.style.display = 'block';
+      wrap.innerHTML = '';
+    } finally {
+      btn.textContent = 'Fetch Data'; btn.disabled = false;
+    }
   };
 
+  // Initial Render
   renderAll();
-})();
 </script>
 </body>
 </html>
