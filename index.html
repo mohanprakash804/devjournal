@@ -31,12 +31,8 @@
   *{ box-sizing: border-box; }
   html,body{ height:100%; }
   body{
-    margin:0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    display:flex;
-    min-height:100vh;
+    margin:0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); display:flex; min-height:100vh;
   }
   ::selection{ background: var(--accent-soft); color: var(--accent); }
   ::-webkit-scrollbar{ width:8px; height:8px; }
@@ -44,273 +40,72 @@
 
   a, button, input, textarea, select{ font-family: inherit; color: inherit; }
   button{ cursor:pointer; }
-  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  /* ---------- Sidebar ---------- */
-  .sidebar{
-    width: 240px;
-    flex-shrink:0;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    padding: 24px 16px;
-    display:flex;
-    flex-direction:column;
-    gap: 28px;
-  }
-  .brand{ padding: 0 8px; }
-  .brand .logo{
-    font-family: var(--mono);
-    font-weight:700;
-    font-size: 18px;
-    letter-spacing: 0.5px;
-    color: var(--text);
-  }
+  /* Sidebar */
+  .sidebar{ width: 240px; flex-shrink:0; background: var(--surface); border-right: 1px solid var(--border); padding: 24px 16px; display:flex; flex-direction:column; gap: 28px; }
+  .brand .logo{ font-family: var(--mono); font-weight:700; font-size: 18px; color: var(--text); }
   .brand .logo span{ color: var(--accent); }
-  .brand .tagline{
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--teal);
-    margin-top: 4px;
-    white-space: nowrap;
-    overflow:hidden;
-    text-overflow: ellipsis;
-  }
   .nav{ display:flex; flex-direction:column; gap: 2px; }
-  .nav-item{
-    display:flex;
-    align-items:center;
-    gap: 10px;
-    padding: 9px 10px;
-    border-radius: 7px;
-    background: transparent;
-    border: none;
-    text-align:left;
-    font-size: 13.5px;
-    color: var(--text-muted);
-    font-family: var(--mono);
-    transition: background .15s, color .15s;
-  }
-  .nav-item .bullet{ color: var(--border); font-size: 14px; width: 10px; }
-  .nav-item:hover{ background: var(--surface-2); color: var(--text); }
+  .nav-item{ display:flex; align-items:center; gap: 10px; padding: 9px 10px; border-radius: 7px; background: transparent; border: none; text-align:left; font-size: 13.5px; color: var(--text-muted); font-family: var(--mono); transition: background .15s; }
   .nav-item.active{ background: var(--accent-soft); color: var(--accent); }
+  .nav-item .bullet{ color: var(--border); font-size: 14px; width: 10px; }
   .nav-item.active .bullet{ color: var(--accent); }
 
-  .sidebar-footer{
-    margin-top:auto;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-  }
-  .ghost-btn{
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-size: 12px;
-    padding: 8px 10px;
-    border-radius: 7px;
-    font-family: var(--mono);
-    text-align:left;
-  }
-  .ghost-btn:hover{ color: var(--text); border-color: #3a4150; }
+  .sidebar-footer{ margin-top:auto; display:flex; flex-direction:column; gap:8px; }
+  .ghost-btn{ background: var(--surface-2); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 8px 10px; border-radius: 7px; font-family: var(--mono); text-align:left; }
 
-  /* ---------- Main ---------- */
-  .main{
-    flex:1;
-    min-width:0;
-    padding: 32px 40px 60px;
-    max-width: 1080px;
-  }
+  /* Main */
+  .main{ flex:1; min-width:0; padding: 32px 40px 60px; max-width: 1080px; }
   .view{ display:none; animation: fadeIn .25s ease; }
   .view.active{ display:block; }
   @keyframes fadeIn{ from{ opacity:0; transform: translateY(4px);} to{opacity:1; transform:none;} }
 
+  .card{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
   .view-header{ margin-bottom: 28px; }
-  .view-header h1{
-    font-family: var(--mono);
-    font-size: 22px;
-    margin: 0 0 6px;
-    letter-spacing: 0.2px;
-  }
-  .view-header p{ margin:0; color: var(--text-muted); font-size: 13.5px; }
+  .view-header h1{ font-family: var(--mono); font-size: 22px; margin: 0 0 6px; }
+  .section-title{ font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; color: var(--text-muted); margin: 0 0 14px; }
 
-  .card{
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-  }
-
-  /* ---------- Dashboard ---------- */
-  .stat-grid{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 22px;
-  }
-  .stat-card{
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-  }
-  .stat-card .num{
-    font-family: var(--mono);
-    font-size: 26px;
-    font-weight:700;
-    color: var(--accent);
-  }
+  /* Dashboard Stats */
+  .stat-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+  .stat-card{ background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+  .stat-card .num{ font-family: var(--mono); font-size: 26px; font-weight:700; color: var(--accent); }
   .stat-card .label{ font-size: 12px; color: var(--text-muted); margin-top:4px; }
   .dash-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
-  @media (max-width: 900px){ .dash-grid{ grid-template-columns: 1fr; } .stat-grid{ grid-template-columns: repeat(2,1fr); } }
 
-  .section-title{
-    font-family: var(--mono);
-    font-size: 12.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--text-muted);
-    margin: 0 0 14px;
-  }
+  /* Forms */
+  input[type=text], input[type=date], input[type=number], textarea, select{ width:100%; background: var(--surface-2); border: 1px solid var(--border); border-radius: 7px; padding: 9px 11px; font-size: 13.5px; margin-bottom: 10px; color: white; }
+  .btn{ background: var(--accent); color: #1a1408; border: none; font-weight:600; font-size: 13.5px; padding: 10px 16px; border-radius: 7px; font-family: var(--mono); }
 
-  /* ---------- Forms ---------- */
-  .form-grid{ display:grid; gap: 12px; }
-  label{ font-size: 12.5px; color: var(--text-muted); display:block; margin-bottom:5px; }
-  input[type=text], input[type=date], input[type=number], textarea, select{
-    width:100%;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    padding: 9px 11px;
-    font-size: 13.5px;
-  }
-  textarea{ resize:vertical; min-height: 80px; }
-  .row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-  .row3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; }
-  @media (max-width: 700px){ .row, .row3{ grid-template-columns: 1fr; } }
-
-  .btn{
-    background: var(--accent);
-    color: #1a1408;
-    border: none;
-    font-weight:600;
-    font-size: 13.5px;
-    padding: 10px 16px;
-    border-radius: 7px;
-    font-family: var(--mono);
-  }
-  .btn:hover{ filter: brightness(1.08); }
-  .btn-outline{
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-size: 12.5px;
-    padding: 7px 12px;
-    border-radius: 7px;
-  }
-  .btn-outline:hover{ color: var(--text); border-color: #3a4150; }
-  .btn-danger{ color: var(--red); }
-
-  /* ---------- Journal timeline ---------- */
+  /* Timeline */
   .timeline{ position:relative; margin-top: 22px; padding-left: 26px; }
-  .timeline::before{
-    content:'';
-    position:absolute; left: 6px; top:4px; bottom:4px;
-    width: 1px; background: var(--border);
-  }
+  .timeline::before{ content:''; position:absolute; left: 6px; top:4px; bottom:4px; width: 1px; background: var(--border); }
   .commit{ position:relative; padding-bottom: 22px; }
-  .commit:last-child{ padding-bottom:0; }
-  .commit::before{
-    content:'';
-    position:absolute; left:-26px; top: 4px;
-    width:11px; height:11px; border-radius:50%;
-    background: var(--bg); border: 2px solid var(--accent);
-  }
-  .commit-head{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
-  .commit-hash{ font-family: var(--mono); color: var(--teal); font-size: 12.5px; }
-  .commit-date{ font-family: var(--mono); color: var(--text-muted); font-size: 11.5px; }
-  .commit-title{ font-weight:600; font-size: 14.5px; margin: 4px 0 6px; }
-  .commit-body{ font-size: 13px; color: var(--text-muted); line-height:1.5; white-space: pre-wrap; }
-  .chip-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
-  .chip{
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 20px;
-    background: var(--surface-2);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
-  .diffstat{ font-family: var(--mono); font-size:11.5px; }
-  .diffstat .plus{ color: var(--green); }
-  .commit-actions{ margin-top:8px; }
-  .commit-actions button{ background:none; border:none; color: var(--text-muted); font-size:11.5px; padding:0; }
-  .commit-actions button:hover{ color: var(--red); }
+  .commit::before{ content:''; position:absolute; left:-26px; top: 4px; width:11px; height:11px; border-radius:50%; background: var(--bg); border: 2px solid var(--accent); }
+  .commit-hash{ color: var(--teal); font-size: 12.5px; font-family: var(--mono); }
+  .commit-title{ font-weight:600; font-size: 14.5px; margin: 4px 0; }
 
-  .empty-state{
-    text-align:center;
-    padding: 40px 20px;
-    color: var(--text-muted);
-    font-size: 13.5px;
-  }
-  .empty-state .glyph{ font-family: var(--mono); font-size: 22px; color: var(--border); margin-bottom:10px; }
-
-  /* ---------- Skills ---------- */
-  .skill-row{
-    display:flex; align-items:center; gap:14px;
-    padding: 12px 0; border-bottom: 1px solid var(--border);
-  }
-  .skill-row:last-child{ border-bottom:none; }
-  .skill-name{ width: 140px; flex-shrink:0; font-size:13.5px; font-weight:600; }
+  /* Skills */
+  .skill-row{ display:flex; align-items:center; gap:14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .skill-bar-track{ flex:1; height:8px; background: var(--surface-2); border-radius:4px; overflow:hidden; }
-  .skill-bar-fill{ height:100%; background: linear-gradient(90deg, var(--teal), var(--accent)); border-radius:4px; }
+  .skill-bar-fill{ height:100%; background: linear-gradient(90deg, var(--teal), var(--accent)); }
   .skill-level{ font-family: var(--mono); width:38px; text-align:right; font-size:12.5px; color: var(--text-muted); }
-  .skill-log-btn{ font-family: var(--mono); font-size:11px; color: var(--teal); background:none; border:1px solid var(--border); padding:4px 8px; border-radius:6px; }
-  .skill-log-btn:hover{ border-color: var(--teal); }
 
-  /* ---------- GitHub Activity Styles ---------- */
-  .gh-profile{ display:flex; gap:16px; align-items:center; }
-  .gh-profile img{ width:56px; height:56px; border-radius:50%; border:1px solid var(--border); }
-  .gh-profile .name{ font-weight:700; font-size:15px; }
-  .gh-profile .login{ font-family: var(--mono); font-size:12px; color: var(--teal); }
-  .event-item{ display:flex; justify-content:space-between; gap:10px; padding:8px 0; border-bottom:1px solid var(--border); font-size:12.5px; }
-  .event-item:last-child{ border-bottom:none; }
-  .event-item .what{ color: var(--text); }
-  .event-item .when{ color: var(--text-muted); font-family: var(--mono); font-size:11px; white-space:nowrap; }
+  /* GitHub Profile Styles */
+  .gh-profile{ display:flex; gap:16px; align-items:center; margin-bottom: 20px; }
+  .gh-profile img{ width:64px; height:64px; border-radius:50%; border:2px solid var(--accent); }
+  .event-item{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size: 13px; }
 
-  /* ---------- Goals ---------- */
-  .goal-card{ border: 1px solid var(--border); border-radius: var(--radius); padding:16px 18px; margin-bottom:14px; }
-  .goal-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
-  .goal-title{ font-weight:600; font-size:14.5px; }
-  .goal-target{ font-size:11.5px; color: var(--text-muted); font-family: var(--mono); margin-top:2px; }
-  .streak-badge{ font-family: var(--mono); font-size:12px; color: var(--accent); white-space:nowrap; }
-  .week-grid{ display:flex; gap:3px; margin-top:12px; flex-wrap:wrap; }
-  .day-cell{ width:16px; height:16px; border-radius:3px; background: var(--surface-2); }
+  /* Goals */
+  .goal-card{ border: 1px solid var(--border); border-radius: var(--radius); padding:16px; margin-bottom:12px; }
+  .week-grid{ display:flex; gap:3px; margin-top:10px; }
+  .day-cell{ width:15px; height:15px; border-radius:2px; background: var(--surface-2); }
   .day-cell.done{ background: var(--green); }
-  .day-cell.today{ box-shadow: 0 0 0 1.5px var(--accent) inset; cursor:pointer; }
-  .day-cell.today:hover{ filter:brightness(1.2); }
-
-  .toast{
-    position:fixed; bottom:22px; right:22px;
-    background: var(--surface-2); border:1px solid var(--border);
-    padding:10px 16px; border-radius:8px; font-size:13px;
-    font-family: var(--mono);
-    opacity:0; transform: translateY(8px);
-    transition: all .25s; pointer-events:none; z-index:50;
-  }
-  .toast.show{ opacity:1; transform:none; }
-
-  .chart-wrap{ position:relative; height: 220px; margin-top:10px; }
-  .flex-between{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
 
   @media (max-width: 800px){
     body{ flex-direction:column; }
-    .sidebar{ width:100%; flex-direction:row; align-items:center; padding:14px 16px; overflow-x:auto; }
-    .brand{ padding:0; margin-right:auto; }
-    .brand .tagline{ display:none; }
-    .nav{ flex-direction:row; }
-    .sidebar-footer{ display:none; }
-    .main{ padding: 20px; }
+    .sidebar{ width:100%; flex-direction:row; padding: 10px; overflow-x:auto; }
     .stat-grid{ grid-template-columns: repeat(2,1fr); }
+    .dash-grid{ grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -319,7 +114,7 @@
   <nav class="sidebar">
     <div class="brand">
       <div class="logo">dev<span>Journal</span></div>
-      <div class="tagline">$ git log --author=you --stat</div>
+      <div class="tagline">growth tracker</div>
     </div>
     <div class="nav" id="nav">
       <button class="nav-item active" data-view="dashboard"><span class="bullet">●</span>dashboard</button>
@@ -329,72 +124,30 @@
       <button class="nav-item" data-view="goals"><span class="bullet">●</span>goals</button>
     </div>
     <div class="sidebar-footer">
-      <button class="ghost-btn" id="exportBtn">↓ export data (.json)</button>
-      <button class="ghost-btn" id="importBtn">↑ import data (.json)</button>
-      <input type="file" id="importFile" accept="application/json" style="display:none">
+      <button class="ghost-btn" id="exportBtn">export json</button>
     </div>
   </nav>
 
   <main class="main">
-
     <!-- DASHBOARD -->
     <section class="view active" id="view-dashboard">
-      <div class="view-header">
-        <h1>Dashboard</h1>
-        <p>An overview of your growth log.</p>
-      </div>
+      <div class="view-header"><h1>Overview</h1><p>Your progress summary.</p></div>
       <div class="stat-grid" id="statGrid"></div>
       <div class="dash-grid">
-        <div class="card">
-          <p class="section-title">Recent commits</p>
-          <div id="recentCommits"></div>
-        </div>
-        <div class="card">
-          <p class="section-title">Top skills</p>
-          <div id="topSkills"></div>
-        </div>
+        <div class="card"><p class="section-title">Recent logs</p><div id="recentCommits"></div></div>
+        <div class="card"><p class="section-title">Top Skills</p><div id="topSkills"></div></div>
       </div>
     </section>
 
     <!-- JOURNAL -->
     <section class="view" id="view-journal">
-      <div class="view-header">
-        <h1>Journal</h1>
-        <p>Log what you built, learned, or fixed today.</p>
-      </div>
+      <div class="view-header"><h1>Journal</h1><p>Log your daily building process.</p></div>
       <div class="card">
-        <div class="form-grid">
-          <div class="row3">
-            <div>
-              <label for="jDate">Date</label>
-              <input type="date" id="jDate">
-            </div>
-            <div>
-              <label for="jTime">Time spent (min)</label>
-              <input type="number" id="jTime" min="0" placeholder="60">
-            </div>
-            <div>
-              <label for="jMood">Mood</label>
-              <select id="jMood">
-                <option value="great">🔥 Great</option>
-                <option value="okay" selected>🙂 Okay</option>
-                <option value="rough">😩 Rough</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label for="jTitle">Title</label>
-            <input type="text" id="jTitle" placeholder="Commit message style title">
-          </div>
-          <div>
-            <label for="jBody">Notes</label>
-            <textarea id="jBody" placeholder="What did you work on today?"></textarea>
-          </div>
-          <div>
-            <label for="jTags">Tags (comma separated)</label>
-            <input type="text" id="jTags" placeholder="debugging, python">
-          </div>
-          <div><button class="btn" id="addEntryBtn">commit entry →</button></div>
+        <input type="text" id="jTitle" placeholder="What did you build/learn?">
+        <textarea id="jBody" placeholder="Notes..."></textarea>
+        <div style="display:flex; gap:10px;">
+           <input type="date" id="jDate">
+           <button class="btn" id="addEntryBtn">Log Entry</button>
         </div>
       </div>
       <div id="journalList"></div>
@@ -402,379 +155,175 @@
 
     <!-- SKILLS -->
     <section class="view" id="view-skills">
-      <div class="view-header">
-        <h1>Skills</h1>
-        <p>Track proficiency over time.</p>
-      </div>
-      <div class="card" style="margin-bottom:16px;">
-        <div class="row3">
-          <div>
-            <label for="sName">Skill name</label>
-            <input type="text" id="sName" placeholder="Python">
-          </div>
-          <div>
-            <label for="sLevel">Level (0–100)</label>
-            <input type="number" id="sLevel" min="0" max="100" placeholder="50">
-          </div>
-          <div style="display:flex; align-items:flex-end;">
-            <button class="btn" id="addSkillBtn" style="width:100%;">add skill</button>
-          </div>
+      <div class="view-header"><h1>Skills</h1></div>
+      <div class="card" style="margin-bottom:15px;">
+        <div style="display:flex; gap:10px;">
+          <input type="text" id="sName" placeholder="Skill (e.g. Python)">
+          <input type="number" id="sLevel" placeholder="Level 0-100">
+          <button class="btn" id="addSkillBtn">Add</button>
         </div>
       </div>
-      <div class="card" style="margin-bottom:16px;" id="skillListCard">
-        <div id="skillList"></div>
-      </div>
-      <div class="dash-grid">
-        <div class="card">
-          <p class="section-title">Levels</p>
-          <div class="chart-wrap"><canvas id="skillBarChart"></canvas></div>
-        </div>
-        <div class="card">
-          <div class="flex-between">
-            <p class="section-title">Growth</p>
-            <select id="skillHistorySelect"></select>
-          </div>
-          <div class="chart-wrap"><canvas id="skillLineChart"></canvas></div>
-        </div>
-      </div>
+      <div id="skillList"></div>
+      <div class="chart-wrap" style="height:250px; margin-top:20px;"><canvas id="skillBarChart"></canvas></div>
     </section>
 
     <!-- GITHUB -->
     <section class="view" id="view-github">
-      <div class="view-header">
-        <h1>GitHub Activity</h1>
-        <p>Pull in activity for any username.</p>
-      </div>
-      <div class="card" style="margin-bottom:16px;">
-        <div class="row">
-          <div>
-            <label for="ghUsername">GitHub username</label>
-            <input type="text" id="ghUsername" placeholder="Enter username...">
-          </div>
-          <div style="display:flex; align-items:flex-end; gap:8px;">
-            <button class="btn" id="ghConnectBtn">fetch activity →</button>
-          </div>
+      <div class="view-header"><h1>GitHub Activity</h1><p>Fetch details for any username.</p></div>
+      <div class="card">
+        <div style="display:flex; gap:10px;">
+          <input type="text" id="ghUsername" placeholder="Enter GitHub username...">
+          <button class="btn" id="ghConnectBtn">Fetch activity</button>
         </div>
-        <p id="ghError" style="color:var(--red); font-size:12.5px; margin:10px 0 0; display:none;"></p>
+        <p id="ghError" style="color:var(--red); display:none; margin-top:10px;"></p>
       </div>
       <div id="ghContent"></div>
     </section>
 
     <!-- GOALS -->
     <section class="view" id="view-goals">
-      <div class="view-header">
-        <h1>Goals</h1>
-        <p>Check in daily to keep the streak alive.</p>
-      </div>
-      <div class="card" style="margin-bottom:16px;">
-        <div class="row">
-          <div>
-            <label for="gTitle">Goal</label>
-            <input type="text" id="gTitle" placeholder="Code for 1 hour every day">
-          </div>
-          <div>
-            <label for="gTarget">Target date</label>
-            <input type="date" id="gTarget">
-          </div>
-        </div>
-        <div style="margin-top:12px;"><button class="btn" id="addGoalBtn">add goal</button></div>
+      <div class="view-header"><h1>Goals</h1></div>
+      <div class="card" style="margin-bottom:15px;">
+        <input type="text" id="gTitle" placeholder="Set a new goal...">
+        <button class="btn" id="addGoalBtn">Add Goal</button>
       </div>
       <div id="goalList"></div>
     </section>
-
   </main>
-
-  <div class="toast" id="toast"></div>
 
 <script>
 (function(){
   "use strict";
 
-  const DEFAULT_STATE = { entries: [], skills: [], goals: [], githubUsername: '' };
-  let state = structuredClone(DEFAULT_STATE);
-  let skillCharts = { bar: null, line: null };
+  // State Management
+  const DEFAULT_STATE = { entries: [], skills: [], goals: [] };
+  let state = Object.assign(DEFAULT_STATE, JSON.parse(localStorage.getItem('devjournal-v2') || '{}'));
 
-  async function loadState(){
-    try{
-      const raw = localStorage.getItem('devjournal-state');
-      if(raw) state = Object.assign(structuredClone(DEFAULT_STATE), JSON.parse(raw));
-    }catch(e){ state = structuredClone(DEFAULT_STATE); }
-  }
-
-  async function saveState(){
-    localStorage.setItem('devjournal-state', JSON.stringify(state));
-  }
-
+  function save(){ localStorage.setItem('devjournal-v2', JSON.stringify(state)); renderAll(); }
   function uid(){ return Math.random().toString(36).slice(2,9); }
-  function shortHash(str){
-    let h = 0; for(let i=0;i<str.length;i++){ h = (h * 31 + str.charCodeAt(i)) | 0; }
-    return (h >>> 0).toString(16).padStart(7,'0').slice(0,7);
-  }
-  function todayStr(){ return new Date().toISOString().slice(0,10); }
-  function formatDate(d){
-    return new Date(d + 'T00:00:00').toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
-  }
-  function daysBetween(a,b){ return Math.round((new Date(b) - new Date(a)) / 86400000); }
-
-  let toastTimer;
-  function showToast(msg){
-    const t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(()=> t.classList.remove('show'), 2200);
-  }
-
-  function escapeHtml(str){
-    const div = document.createElement('div');
-    div.textContent = str || ''; return div.innerHTML;
-  }
 
   // Navigation
-  document.getElementById('nav').addEventListener('click', (e)=>{
-    const btn = e.target.closest('.nav-item'); if(!btn) return;
-    document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    document.getElementById('view-' + btn.dataset.view).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.nav-item, .view').forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('view-' + btn.dataset.view).classList.add('active');
+    };
   });
 
-  /* ---------- Dashboard Logic ---------- */
-  function currentStreak(){
-    const dates = [...new Set(state.entries.map(e=>e.date))].sort().reverse();
-    if(dates.length === 0) return 0;
-    let streak = 0; let expected = dates[0];
-    const diff = daysBetween(dates[0], todayStr());
-    if(diff > 1) return 0;
-    for(const d of dates){
-      if(d === expected){
-        streak++;
-        const prev = new Date(expected + 'T00:00:00');
-        prev.setDate(prev.getDate()-1);
-        expected = prev.toISOString().slice(0,10);
-      } else break;
-    }
-    return streak;
-  }
-
-  function entryToCommitHtml(e){
-    const words = (e.content || '').trim().split(/\s+/).filter(Boolean).length;
-    const mood = { great:'🔥', okay:'🙂', rough:'😩' }[e.mood] || '';
-    return `
-      <div class="commit">
-        <div class="commit-head">
-          <span class="commit-hash">#${e.hash}</span>
-          <span class="commit-date">${formatDate(e.date)} ${mood} ${e.timeSpent}m</span>
-        </div>
-        <div class="commit-title">${escapeHtml(e.title)}</div>
-        <div class="diffstat"><span class="plus">+${words}</span> words</div>
-        <div class="commit-actions"><button data-id="${e.id}" class="delEntry">delete</button></div>
-      </div>
-    `;
-  }
-
-  function renderDashboard(){
-    const grid = document.getElementById('statGrid');
-    const firstDate = state.entries.length ? state.entries.map(e=>e.date).sort()[0] : null;
-    const daysTracking = firstDate ? daysBetween(firstDate, todayStr()) + 1 : 0;
-    grid.innerHTML = `
-      <div class="stat-card"><div class="num">${state.entries.length}</div><div class="label">commits</div></div>
-      <div class="stat-card"><div class="num">${currentStreak()}</div><div class="label">streak</div></div>
+  // Render All Sections
+  function renderAll() {
+    // Dashboard
+    document.getElementById('statGrid').innerHTML = `
+      <div class="stat-card"><div class="num">${state.entries.length}</div><div class="label">logs</div></div>
       <div class="stat-card"><div class="num">${state.skills.length}</div><div class="label">skills</div></div>
-      <div class="stat-card"><div class="num">${daysTracking}</div><div class="label">days</div></div>
+      <div class="stat-card"><div class="num">${state.goals.length}</div><div class="label">goals</div></div>
+      <div class="stat-card"><div class="num">${new Set(state.entries.map(e=>e.date)).size}</div><div class="label">active days</div></div>
     `;
-    const recent = [...state.entries].sort((a,b)=> b.date.localeCompare(a.date) || b.createdAt - a.createdAt).slice(0,3);
-    document.getElementById('recentCommits').innerHTML = recent.length ? `<div class="timeline">${recent.map(entryToCommitHtml).join('')}</div>` : '<div class="empty-state">No entries.</div>';
-    
-    const top = [...state.skills].sort((a,b)=> b.level - a.level).slice(0,3);
-    document.getElementById('topSkills').innerHTML = top.length ? top.map(s => `<div class="skill-row"><div class="skill-name">${escapeHtml(s.name)}</div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:${s.level}%"></div></div><div class="skill-level">${s.level}</div></div>`).join('') : '<div class="empty-state">No skills.</div>';
+
+    // Journal
+    const jList = document.getElementById('journalList');
+    jList.innerHTML = state.entries.sort((a,b)=>b.ts - a.ts).map(e=>`
+      <div class="timeline"><div class="commit">
+        <div class="commit-hash">#${e.id}</div>
+        <div class="commit-title">${e.title}</div>
+        <div style="font-size:12px; color:var(--text-muted)">${e.date}</div>
+      </div></div>
+    `).join('') || '<div class="empty-state">No logs yet.</div>';
+
+    // Skills
+    const sList = document.getElementById('skillList');
+    sList.innerHTML = state.skills.map(s=>`
+      <div class="skill-row">
+        <div style="width:100px; font-size:13px;">${s.name}</div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${s.level}%"></div></div>
+        <div class="skill-level">${s.level}</div>
+      </div>
+    `).join('');
+
+    // Goals
+    const gList = document.getElementById('goalList');
+    gList.innerHTML = state.goals.map(g=>`
+      <div class="goal-card">
+        <div style="font-weight:600">${g.title}</div>
+        <div class="week-grid">${Array(14).fill(0).map(()=>`<div class="day-cell"></div>`).join('')}</div>
+      </div>
+    `).join('') || '<div class="empty-state">No goals set.</div>';
   }
 
-  /* ---------- Journal Logic ---------- */
-  document.getElementById('jDate').value = todayStr();
-  function renderJournal(){
-    const wrap = document.getElementById('journalList');
-    const sorted = [...state.entries].sort((a,b)=> b.date.localeCompare(a.date) || b.createdAt - a.createdAt);
-    wrap.innerHTML = sorted.length ? `<div class="timeline">${sorted.map(entryToCommitHtml).join('')}</div>` : '<div class="empty-state">Nothing logged.</div>';
-    wrap.querySelectorAll('.delEntry').forEach(btn=> btn.onclick = async ()=>{
-      state.entries = state.entries.filter(e=>e.id !== btn.dataset.id);
-      await saveState(); renderAll(); showToast('Deleted');
-    });
-  }
-
-  document.getElementById('addEntryBtn').onclick = async ()=>{
-    const title = document.getElementById('jTitle').value.trim();
-    if(!title){ showToast('Enter title'); return; }
-    state.entries.push({
-      id: uid(), title, date: document.getElementById('jDate').value || todayStr(),
-      content: document.getElementById('jBody').value.trim(),
-      tags: document.getElementById('jTags').value.split(',').map(t=>t.trim()).filter(Boolean),
-      timeSpent: parseInt(document.getElementById('jTime').value) || 0,
-      mood: document.getElementById('jMood').value, createdAt: Date.now(),
-      hash: shortHash(title + Date.now())
-    });
-    await saveState(); 
-    document.getElementById('jTitle').value = ''; document.getElementById('jBody').value = '';
-    renderAll(); showToast('Committed');
+  // Add Journal
+  document.getElementById('addEntryBtn').onclick = () => {
+    const t = document.getElementById('jTitle').value;
+    if(!t) return;
+    state.entries.push({ id: uid(), title: t, date: document.getElementById('jDate').value || new Date().toISOString().slice(0,10), ts: Date.now() });
+    document.getElementById('jTitle').value = ''; save();
   };
 
-  /* ---------- Skills Logic ---------- */
-  function renderSkills(){
-    const wrap = document.getElementById('skillList');
-    wrap.innerHTML = state.skills.length ? state.skills.map(s => `<div class="skill-row"><div class="skill-name">${escapeHtml(s.name)}</div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:${s.level}%"></div></div><div class="skill-level">${s.level}</div><button class="skill-log-btn" data-id="${s.id}">log</button></div>`).join('') : '<div class="empty-state">No skills.</div>';
-    wrap.querySelectorAll('.skill-log-btn').forEach(btn=> btn.onclick = async ()=>{
-      const s = state.skills.find(sk=>sk.id === btn.dataset.id);
-      const lvl = prompt(`Level for ${s.name}:`, s.level);
-      if(lvl === null) return;
-      s.level = Math.max(0, Math.min(100, parseInt(lvl) || 0));
-      s.history.push({ date: todayStr(), level: s.level });
-      await saveState(); renderAll();
-    });
-    renderSkillCharts();
-  }
-
-  function renderSkillCharts(){
-    const barCtx = document.getElementById('skillBarChart');
-    const lineCtx = document.getElementById('skillLineChart');
-    const sel = document.getElementById('skillHistorySelect');
-    if(skillCharts.bar) skillCharts.bar.destroy();
-    if(skillCharts.line) skillCharts.line.destroy();
-    if(!state.skills.length) return;
-
-    skillCharts.bar = new Chart(barCtx, {
-      type: 'bar', data: { labels: state.skills.map(s=>s.name), datasets: [{ data: state.skills.map(s=>s.level), backgroundColor: '#e8a33d' }] },
-      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display:false } } }
-    });
-
-    sel.innerHTML = state.skills.map(s=>`<option value="${s.id}">${escapeHtml(s.name)}</option>`).join('');
-    function drawLine(){
-      const s = state.skills.find(sk=>sk.id === sel.value) || state.skills[0];
-      if(skillCharts.line) skillCharts.line.destroy();
-      skillCharts.line = new Chart(lineCtx, {
-        type: 'line', data: { labels: s.history.map(h=>h.date), datasets: [{ data: s.history.map(h=>h.level), borderColor:'#4fb3a9', fill:true }] },
-        options: { responsive:true, maintainAspectRatio:false, plugins: { legend: { display:false } } }
-      });
-    }
-    drawLine(); sel.onchange = drawLine;
-  }
-
-  document.getElementById('addSkillBtn').onclick = async ()=>{
-    const n = document.getElementById('sName').value.trim();
+  // Add Skill
+  document.getElementById('addSkillBtn').onclick = () => {
+    const n = document.getElementById('sName').value;
+    const l = document.getElementById('sLevel').value;
     if(!n) return;
-    const l = parseInt(document.getElementById('sLevel').value) || 0;
-    state.skills.push({ id: uid(), name: n, level: l, history: [{ date: todayStr(), level: l }] });
-    await saveState(); document.getElementById('sName').value = ''; renderAll();
+    state.skills.push({ name: n, level: parseInt(l) || 0 });
+    document.getElementById('sName').value = ''; save();
   };
 
-  /* ---------- GITHUB LOGIC (THE FIX) ---------- */
-  document.getElementById('ghConnectBtn').onclick = async ()=>{
+  // Add Goal
+  document.getElementById('addGoalBtn').onclick = () => {
+    const t = document.getElementById('gTitle').value;
+    if(!t) return;
+    state.goals.push({ title: t });
+    document.getElementById('gTitle').value = ''; save();
+  };
+
+  // GITHUB LOGIC (THE FIX FOR ANY USER)
+  document.getElementById('ghConnectBtn').onclick = async () => {
     const user = document.getElementById('ghUsername').value.trim();
-    if(!user){ showToast('Enter username'); return; }
+    if(!user) return;
     const btn = document.getElementById('ghConnectBtn');
-    btn.textContent = 'fetching...'; btn.disabled = true;
-    try{
+    const err = document.getElementById('ghError');
+    const wrap = document.getElementById('ghContent');
+
+    btn.textContent = 'Fetching...'; btn.disabled = true; err.style.display = 'none';
+
+    try {
       const [uResp, eResp] = await Promise.all([
         fetch(`https://api.github.com/users/${user}`),
         fetch(`https://api.github.com/users/${user}/events/public?per_page=10`)
       ]);
-      if(!uResp.ok) throw new Error('Not found');
+      if(!uResp.ok) throw new Error('User not found');
       const userData = await uResp.json();
       const eventsData = await eResp.json();
-      renderGithub(userData, eventsData);
-    } catch(err){ showToast('GitHub user not found'); }
-    finally{ btn.textContent = 'fetch activity →'; btn.disabled = false; }
-  };
 
-  function describeEvent(ev) {
-    const repo = ev.repo ? ev.repo.name : 'repo';
-    return `${ev.type.replace('Event','')} in ${repo}`;
-  }
-
-  function renderGithub(user, events) {
-    const wrap = document.getElementById('ghContent');
-    wrap.innerHTML = `
-      <div class="card" style="margin-top:16px;">
-        <div class="gh-profile">
-          <img src="${user.avatar_url}">
-          <div><div class="name">${escapeHtml(user.name || user.login)}</div><div class="login">@${user.login}</div></div>
+      wrap.innerHTML = `
+        <div class="card" style="margin-top:20px;">
+          <div class="gh-profile">
+            <img src="${userData.avatar_url}">
+            <div>
+              <div style="font-weight:700; font-size:16px;">${userData.name || userData.login}</div>
+              <div style="color:var(--teal); font-size:13px;">@${userData.login}</div>
+            </div>
+          </div>
+          <div style="text-align:center; margin-bottom:20px;">
+            <img src="https://github-readme-stats.vercel.app/api?username=${userData.login}&show_icons=true&theme=dark&hide_border=true" style="max-width:100%; margin-bottom:10px;">
+            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${userData.login}&layout=compact&theme=dark&hide_border=true" style="max-width:100%;">
+          </div>
+          <p class="section-title">Public Events</p>
+          <div>
+            ${eventsData.slice(0,5).map(ev => `
+              <div class="event-item">
+                <span>${ev.type.replace('Event','')} in ${ev.repo.name}</span>
+                <span style="color:var(--text-muted)">${new Date(ev.created_at).toLocaleDateString()}</span>
+              </div>
+            `).join('')}
+          </div>
         </div>
-        <div style="text-align:center; margin: 20px 0;">
-          <img src="https://github-readme-stats.vercel.app/api?username=${user.login}&show_icons=true&theme=dark&hide_border=true" style="max-width:100%; margin-bottom:10px;">
-          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user.login}&layout=compact&theme=dark&hide_border=true" style="max-width:100%;">
-        </div>
-        <p class="section-title">Recent Activity</p>
-        <div>
-          ${events.slice(0, 5).map(ev => `
-            <div class="event-item"><span>${describeEvent(ev)}</span><span class="when">${new Date(ev.created_at).toLocaleDateString()}</span></div>
-          `).join('')}
-        </div>
-      </div>
-    `;
-  }
-
-  /* ---------- Goals Logic ---------- */
-  function goalStreak(g){
-    const days = [...g.checkins].sort().reverse();
-    if(!days.length) return 0;
-    let s = 0; let exp = days[0];
-    if(daysBetween(days[0], todayStr()) > 1) return 0;
-    for(const d of days){
-      if(d === exp){ s++; const p = new Date(exp + 'T00:00:00'); p.setDate(p.getDate()-1); exp = p.toISOString().slice(0,10); }
-      else break;
-    }
-    return s;
-  }
-
-  function renderGoals(){
-    const wrap = document.getElementById('goalList');
-    wrap.innerHTML = state.goals.length ? state.goals.map(g => {
-      const days = [];
-      for(let i=13; i>=0; i--){
-        const d = new Date(); d.setDate(d.getDate()-i);
-        const k = d.toISOString().slice(0,10);
-        const done = g.checkins.includes(k);
-        days.push(`<div class="day-cell ${done?'done':''} ${k===todayStr()?'today':''}" data-goal="${g.id}" data-date="${k}"></div>`);
-      }
-      return `<div class="goal-card"><div class="goal-top"><div><div class="goal-title">${escapeHtml(g.title)}</div></div><div><div class="streak-badge">${goalStreak(g)}d streak</div><button class="btn-outline btn-danger" data-del="${g.id}">remove</button></div></div><div class="week-grid">${days.join('')}</div></div>`;
-    }).join('') : '<div class="empty-state">No goals.</div>';
-    
-    wrap.querySelectorAll('.day-cell.today').forEach(c=> c.onclick = async ()=>{
-      const g = state.goals.find(gl=>gl.id === c.dataset.goal);
-      const idx = g.checkins.indexOf(c.dataset.date);
-      if(idx>=0) g.checkins.splice(idx,1); else g.checkins.push(c.dataset.date);
-      await saveState(); renderAll();
-    });
-    wrap.querySelectorAll('[data-del]').forEach(b=> b.onclick = async ()=>{
-      state.goals = state.goals.filter(g=>g.id !== b.dataset.del);
-      await saveState(); renderAll();
-    });
-  }
-
-  document.getElementById('addGoalBtn').onclick = async ()=>{
-    const t = document.getElementById('gTitle').value.trim();
-    if(!t) return;
-    state.goals.push({ id: uid(), title: t, checkins: [], targetDate: document.getElementById('gTarget').value });
-    await saveState(); document.getElementById('gTitle').value = ''; renderAll();
+      `;
+    } catch(e) { err.textContent = e.message; err.style.display = 'block'; wrap.innerHTML = ''; }
+    finally { btn.textContent = 'Fetch activity'; btn.disabled = false; }
   };
 
-  /* ---------- Init ---------- */
-  function renderAll(){
-    renderDashboard(); renderJournal(); renderSkills(); renderGoals();
-  }
-
-  document.getElementById('exportBtn').onclick = ()=>{
-    const blob = new Blob([JSON.stringify(state)], {type:'application/json'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'devjournal.json'; a.click();
-  };
-  
-  document.getElementById('importBtn').onclick = ()=> document.getElementById('importFile').click();
-  document.getElementById('importFile').onchange = (e)=>{
-    const f = e.target.files[0]; if(!f) return;
-    const r = new FileReader(); r.onload = async ()=>{
-      state = JSON.parse(r.result); await saveState(); renderAll();
-    }; r.readAsText(f);
-  };
-
-  (async function init(){ await loadState(); renderAll(); })();
+  renderAll();
 })();
 </script>
 </body>
