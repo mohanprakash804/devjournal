@@ -896,21 +896,6 @@ function renderGithub(user, events) {
       </div>
     `;
 }
-      return `
-        <div class="goal-card">
-          <div class="goal-top">
-            <div>
-              <div class="goal-title">${escapeHtml(g.title)}</div>
-              ${g.targetDate ? `<div class="goal-target">target: ${formatDate(g.targetDate)}</div>` : ''}
-            </div>
-            <div style="text-align:right;">
-              <div class="streak-badge">${goalStreak(g)} day streak</div>
-              <button class="btn-outline btn-danger" data-del="${g.id}" style="margin-top:6px;">remove</button>
-            </div>
-          </div>
-          <div class="week-grid">${days.join('')}</div>
-        </div>
-      `;
     }).join('');
     wrap.querySelectorAll('.day-cell.today').forEach(cell=>{
       cell.addEventListener('click', async ()=>{
