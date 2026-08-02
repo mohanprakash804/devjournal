@@ -853,101 +853,45 @@
     }
   }
 
-  function renderGithub(user, events){
+ function renderGithub(user, events){
     const wrap = document.getElementById('ghContent');
+    const btn = document.getElementById('ghConnectBtn');
+    
+    // Button-ah thirumba normal-ah mathurom
+    btn.textContent = 'Connect';
+    btn.disabled = false;
 
-    const counts = {};
-    events.forEach(ev=>{
-      const d = ev.created_at ? ev.created_at.slice(0,10) : null;
-      if(d) counts[d] = (counts[d] || 0) + 1;
-    });
-
-    const cells = [];
-    const today = new Date();
-    for(let i=83;i>=0;i--){
-      const d = new Date(today);
-      d.setDate(d.getDate() - i);
-      const key = d.toISOString().slice(0,10);
-      cells.push({ date: key, count: counts[key] || 0 });
-    }
-    const columns = [];
-    for(let i=0;i<cells.length;i+=7){ columns.push(cells.slice(i,i+7)); }
-
-    function heatColor(c){
-      if(c === 0) return 'var(--surface-2)';
-      if(c === 1) return 'rgba(111,207,151,0.35)';
-      if(c <= 3) return 'rgba(111,207,151,0.6)';
-      if(c <= 6) return 'rgba(111,207,151,0.85)';
-      return '#6fcf97';
-    }
-
-    const heatmapHtml = columns.map(col => `
-      <div class="heat-col">
-        ${col.map(c => `<div class="heat-cell" title="${c.date}: ${c.count} events" style="background:${heatColor(c.count)}"></div>`).join('')}
-      </div>
-    `).join('');
-
-    const recentEvents = events.slice(0,10);
-    const eventsHtml = recentEvents.length ? recentEvents.map(ev => `
-      <div class="event-item">
-        <span class="what">${escapeHtml(describeEvent(ev))}</span>
-        <span class="when">${ev.created_at ? formatDate(ev.created_at.slice(0,10)) : ''}</span>
-      </div>
-    `).join('') : `<div class="empty-state">No recent public activity found.</div>`;
-
+    // UI-ah clear panni pudhu details podurom
     wrap.innerHTML = `
-      <div class="card" style="margin-bottom:16px;">
-        <div class="gh-profile">
-          <img src="${user.avatar_url}" alt="">
-          <div>
-            <div class="name">${escapeHtml(user.name || user.login)}</div>
-            <div class="login">@${escapeHtml(user.login)}</div>
-          </div>
+        <div style="text-align: center; padding: 20px; color: white;">
+            <!-- User Profile -->
+            <img src="${user.avatar_url}" style="width: 80px; border-radius: 50%; border: 2px solid #58a6ff; margin-bottom: 10px;">
+            <h3 style="margin: 0;">${user.name || user.login}</h3>
+            <p style="font-size: 14px; opacity: 0.8;">${user.bio || 'GitHub Developer'}</p>
+            
+            <!-- GitHub Stats Cards (Yaaroda ID-kum work aagum) -->
+            <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                <img src="https://github-readme-stats.vercel.app/api?username=${user.login}&show_icons=true&theme=dark&hide_border=true" style="max-width: 100%;">
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user.login}&layout=compact&theme=dark&hide_border=true" style="max-width: 100%;">
+            </div>
+
+            <!-- Recent Activity List -->
+            <div style="text-align: left; margin-top: 20px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
+                <h4 style="margin-bottom: 10px; color: #58a6ff;">Recent Activity</h4>
+                <ul style="list-style: none; padding: 0; font-size: 13px;">
+                    ${events.slice(0, 5).map(ev => `
+                        <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <strong>${ev.type.replace('Event','')}</strong> in ${ev.repo.name}
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
         </div>
-        <div class="gh-stats">
-          <div><div class="n">${user.public_repos}</div><div class="l">repos</div></div>
-          <div><div class="n">${user.followers}</div><div class="l">followers</div></div>
-          <div><div class="n">${user.following}</div><div class="l">following</div></div>
-        </div>
-      </div>
-      <div class="card" style="margin-bottom:16px;">
-        <p class="section-title">Activity, last 12 weeks</p>
-        <div class="heatmap">${heatmapHtml}</div>
-      </div>
-      <div class="card">
-        <p class="section-title">Recent public events</p>
-        ${eventsHtml}
-      </div>
     `;
-  }
-
-  async function autoLoadGithub(){
-    if(!state.githubUsername) return;
-    document.getElementById('ghConnectBtn').click();
-  }
-
-  /* ---------------- Goals ---------------- */
-  document.getElementById('addGoalBtn').addEventListener('click', async ()=>{
-    const title = document.getElementById('gTitle').value.trim();
-    if(!title){ showToast('Name the goal first'); return; }
-    const targetDate = document.getElementById('gTarget').value || null;
-    state.goals.push({ id: uid(), title, targetDate, checkins: [] });
-    await saveState();
-    document.getElementById('gTitle').value = '';
-    document.getElementById('gTarget').value = '';
-    renderAll();
-    showToast('Goal added');
-  });
-
-  function goalStreak(goal){
-    const set = new Set(goal.checkins);
-    let streak = 0;
-    let cursor = new Date();
-    if(!set.has(todayStr())) cursor.setDate(cursor.getDate()-1);
-    while(set.has(cursor.toISOString().slice(0,10))){
-      streak++;
-      cursor.setDate(cursor.getDate()-1);
-    }
+    
+    // Result box-ah kaaturom
+    document.getElementById('ghResult').style.display = 'block';
+}
     return streak;
   }
 
