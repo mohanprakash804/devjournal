@@ -853,65 +853,49 @@
     }
   }
 
- function renderGithub(user, events){
+function renderGithub(user, events) {
     const wrap = document.getElementById('ghContent');
     const btn = document.getElementById('ghConnectBtn');
     
-    // Button-ah thirumba normal-ah mathurom
-    btn.textContent = 'Connect';
-    btn.disabled = false;
-
-    // UI-ah clear panni pudhu details podurom
-    wrap.innerHTML = `
-        <div style="text-align: center; padding: 20px; color: white;">
-            <!-- User Profile -->
-            <img src="${user.avatar_url}" style="width: 80px; border-radius: 50%; border: 2px solid #58a6ff; margin-bottom: 10px;">
-            <h3 style="margin: 0;">${user.name || user.login}</h3>
-            <p style="font-size: 14px; opacity: 0.8;">${user.bio || 'GitHub Developer'}</p>
-            
-            <!-- GitHub Stats Cards (Yaaroda ID-kum work aagum) -->
-            <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center;">
-                <img src="https://github-readme-stats.vercel.app/api?username=${user.login}&show_icons=true&theme=dark&hide_border=true" style="max-width: 100%;">
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user.login}&layout=compact&theme=dark&hide_border=true" style="max-width: 100%;">
-            </div>
-
-            <!-- Recent Activity List -->
-            <div style="text-align: left; margin-top: 20px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
-                <h4 style="margin-bottom: 10px; color: #58a6ff;">Recent Activity</h4>
-                <ul style="list-style: none; padding: 0; font-size: 13px;">
-                    ${events.slice(0, 5).map(ev => `
-                        <li style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <strong>${ev.type.replace('Event','')}</strong> in ${ev.repo.name}
-                        </li>
-                    `).join('')}
-                </ul>
-            </div>
-        </div>
-    `;
-    
-    // Result box-ah kaaturom
-    document.getElementById('ghResult').style.display = 'block';
-}
-    return streak;
-  }
-
-  function renderGoals(){
-    const wrap = document.getElementById('goalList');
-    if(state.goals.length === 0){
-      wrap.innerHTML = `<div class="empty-state"><div class="glyph">∅</div>No goals yet — add one above and start checking in daily.</div>`;
-      return;
+    // Reset button
+    if(btn) {
+      btn.textContent = 'fetch activity →';
+      btn.disabled = false;
     }
-    const today = todayStr();
-    wrap.innerHTML = state.goals.map(g => {
-      const days = [];
-      for(let i=27;i>=0;i--){
-        const d = new Date();
-        d.setDate(d.getDate()-i);
-        const key = d.toISOString().slice(0,10);
-        const done = g.checkins.includes(key);
-        const isToday = key === today;
-        days.push(`<div class="day-cell ${done?'done':''} ${isToday?'today':''}" data-goal="${g.id}" data-date="${key}" title="${key}"></div>`);
-      }
+
+    if(!wrap) return;
+
+    // UI-ah update pandrom - Idhu yaaroda username pottaalum automatic-ah work aagum
+    wrap.innerHTML = `
+      <div class="card" style="margin-top:16px; animation: fadeIn 0.3s ease;">
+        <div class="gh-profile" style="display: flex; gap: 16px; align-items: center; margin-bottom: 20px;">
+          <img src="${user.avatar_url}" style="width: 60px; height: 60px; border-radius: 50%; border: 1px solid var(--border);">
+          <div>
+            <div class="name" style="font-weight: 700; font-size: 16px;">${escapeHtml(user.name || user.login)}</div>
+            <div class="login" style="font-family: var(--mono); font-size: 12.5px; color: var(--teal);">@${user.login}</div>
+          </div>
+        </div>
+
+        <p class="section-title">GitHub Stats Card</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 20px;">
+          <img src="https://github-readme-stats.vercel.app/api?username=${user.login}&show_icons=true&theme=dark&hide_border=true" style="max-width: 100%; border-radius: 8px;">
+          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user.login}&layout=compact&theme=dark&hide_border=true" style="max-width: 100%; border-radius: 8px;">
+        </div>
+
+        <p class="section-title">Recent Public Events</p>
+        <div style="background: var(--surface-2); border-radius: 8px; padding: 12px;">
+          ${events.length === 0 ? '<div class="empty-state">No recent public events found.</div>' : 
+            events.slice(0, 6).map(ev => `
+              <div class="event-item" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 12.5px;">
+                <span class="what" style="color: var(--text);">${describeEvent(ev)}</span>
+                <span class="when" style="color: var(--text-muted); font-family: var(--mono); font-size: 11px;">${new Date(ev.created_at).toLocaleDateString()}</span>
+              </div>
+            `).join('')
+          }
+        </div>
+      </div>
+    `;
+}
       return `
         <div class="goal-card">
           <div class="goal-top">
@@ -928,7 +912,6 @@
         </div>
       `;
     }).join('');
-
     wrap.querySelectorAll('.day-cell.today').forEach(cell=>{
       cell.addEventListener('click', async ()=>{
         const goal = state.goals.find(g=>g.id === cell.dataset.goal);
