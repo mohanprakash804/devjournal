@@ -1,4 +1,4 @@
-# DevJournal — Developer Growth Tracker
+# Skill Orbit — Developer Growth Tracker
 
 A single-file HTML app for tracking your developer growth: daily coding journal, skills progress, GitHub activity, and goal streaks. No build step, no backend — just open `index.html`.
 
