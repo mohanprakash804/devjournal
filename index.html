@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevJournal — Developer Growth Tracker</title>
+<title>SkillOrbit — Developer Growth Tracker</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
@@ -327,7 +327,7 @@
 
   <nav class="sidebar">
     <div class="brand">
-      <div class="logo">dev<span>Journal</span></div>
+      <div class="logo">Skill<span>Orbit</span></div>
       <div class="tagline">$ git log --author=you --stat</div>
     </div>
     <div class="nav" id="nav">
@@ -507,7 +507,7 @@
 
   async function loadState(){
     try{
-      const raw = localStorage.getItem('devjournal-state');
+      const raw = localStorage.getItem('skillorbit-state');
       if(raw){
         const parsed = JSON.parse(raw);
         state = Object.assign(structuredClone(DEFAULT_STATE), parsed);
@@ -519,7 +519,7 @@
 
   async function saveState(){
     try{
-      localStorage.setItem('devjournal-state', JSON.stringify(state));
+      localStorage.setItem('skillorbit-state', JSON.stringify(state));
     }catch(e){
       showToast('Could not save — storage error');
       console.error(e);
@@ -913,7 +913,7 @@
   // Export/Import
   document.getElementById('exportBtn').onclick = () => {
     const blob = new Blob([JSON.stringify(state)], {type:'application/json'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'devjournal.json'; a.click();
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'skillorbit.json'; a.click();
   };
   document.getElementById('importBtn').onclick = () => document.getElementById('importFile').click();
   document.getElementById('importFile').onchange = (e) => {
